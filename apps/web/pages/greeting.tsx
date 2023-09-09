@@ -1,15 +1,20 @@
-'use client'
+"use client";
 
-import {trpc} from '../utils/trpc'
+import { trpc } from "../utils/trpc";
 
+function Greeting() {
+  const greet = trpc.greeting.useQuery();
 
-  function Greeting() {
-
-            const greet =  trpc.greeting.greeting.useQuery();
-            console.log("greet",greet.data)
-
-    return (<div>ok</div>)
+  if (greet.isLoading) {
+    return <div>Loading...</div>;
   }
 
+  if (greet.error) {
+    return <div>Error: {greet.error.message}</div>;
+  }
 
-  export default Greeting;
+  return <div>{greet.data}</div>;
+}
+
+
+export default Greeting;
