@@ -1,6 +1,6 @@
-import { httpBatchLink } from '@trpc/client';
-import { createTRPCNext } from '@trpc/next';
-import type { AppRouter } from '../../api/routers/root';
+import { httpBatchLink } from '@local/trpc/client';
+import { createTRPCNext } from '@trpc/next';//import type { AppRouter } from '../../api/routers/root';
+import type { AppRouter } from '@local/trpc/server/router/_app'
 
 function getBaseUrl() {
   if (process.env.SERVER_DEPLOY_URL)
@@ -19,7 +19,7 @@ export const trpc = createTRPCNext<AppRouter>({
            * If you want to use SSR, you need to use the server's full URL
            * @link https://trpc.io/docs/ssr
            **/
-          url: `${getBaseUrl()}/api`,
+          url: `${getBaseUrl()}/api/trpc`,
 
           // You can pass any HTTP headers you wish here
           async headers() {
